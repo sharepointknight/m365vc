@@ -9,12 +9,31 @@
     <title>Microsoft 365 Global Virtual Community - Virtual Career Fair - Schedule</title>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173142104-1"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'UA-173142104-1');
+
+    function showTimezone()
+    {
+        const d = new Date();
+
+        // Get a DateTimeFormat object for the user's current culture (via undefined)
+        // Ask specifically for the long-form of the time zone name in the options
+        const dtf = Intl.DateTimeFormat(undefined, {timeZoneName: 'long'});
+
+        // Format the date to parts, and pull out the value of the time zone name
+        const result = dtf.formatToParts(d).find((part) => part.type == 'timeZoneName').value;
+
+        $("#timezone").text(result);
+    }
+
+    $(document).ready(function () {
+        showTimezone();
+    });
     </script>
 </head>
 <body>
@@ -29,6 +48,7 @@
 
         <img id="eventLogo" src="images/CareerFairLogo.jpg" alt="Microsoft 365 Global Virtual Community Career Fair" style="max-width: 800px;"/>
     </div>
+    <p><b><i>Times shown for sessions are in <span id="timezone">your local time</span>.</i></b></p>
     <script type="text/javascript" src="https://sessionize.com/api/v2/iz8avc9b/view/GridSmart"></script>
 </body>
 </html>
